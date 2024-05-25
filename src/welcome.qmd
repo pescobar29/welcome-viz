@@ -1,0 +1,56 @@
+---
+title: "Welcome to COMP/STAT112"
+format: 
+  html:
+    code-copy: true
+---
+
+## Clear Workspace
+
+It is always a good idea to start by cleaning the workspace environment to avoid troubles that might be caused by variables created in other files
+
+```{r}
+#| results: 'hide'
+
+rm(list = ls())
+```
+
+## Install Unavailable Packages
+
+```{r}
+#| results: 'hide'
+
+packages = c("wordcloud2", "here")
+install.packages(setdiff(packages, rownames(installed.packages())))
+```
+
+## Load Packages
+
+```{r results='hide', message=FALSE}
+#| results: 'hide'
+#| message: FALSE
+
+lapply(packages, require, character.only = TRUE)
+```
+
+## Load Dataset
+
+Load some data to visualize.
+
+```{r}
+ds <- read.csv(here("data", "msg.csv"))
+```
+
+## Visualize Dataset
+
+Visualize data as a wordcloud. The wordcloud will have different colors and alignments each run.
+
+```{r}
+wordcloud2(data=ds, shape = "cardioid")
+```
+
+## References
+
+-   Céline Van den Rul, How to Generate Word Clouds in R \[[Medium](https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a)\]
+-   Sean Murphy, Check for installed packages before running install.packages() \[[Stack Overflow](https://stackoverflow.com/questions/9341635/check-for-installed-packages-before-running-install-packages)\]
+-   Hadley Wickham, The tidyverse style guide \[[Website](https://style.tidyverse.org/index.html)\]
